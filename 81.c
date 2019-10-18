@@ -1,0 +1,62 @@
+#include<stdio.h>
+int main()
+{
+	char a[20][21];
+	int i,j,sum,map=0,p,q,x,y,m,n;
+	//读入行列数 
+	scanf("%d %d",&n,&m);
+	//读入迷宫 
+	for(i=0;i<=n-1;i++)
+	{
+		scanf("%s",a[i]);
+	 }
+	for(i=0;i<=n-1;i++)
+	{
+		for(j=0;j<=m-1;j++)
+		{
+			//判断这个点是不是平地  
+			if(a[i][j]=='.')
+			{
+				sum=0;
+				x=i;y=j;
+				while(a[x][y]!='#')
+				{
+					//如果这里有敌人则执行 
+					if(a[x][y]=='G')
+						sum++;
+					x--;
+				}
+				x=i;y=j;
+				while(a[x][y]!='#')
+				{
+					if(a[x][y]=='G')
+						sum++;
+					x++;
+				}
+				x=i;y=j;
+				while(a[x][y]!='#')
+				{
+					if(a[x][y]=='G')
+						sum++;
+					y--;
+				}
+				x=i;y=j;
+				while(a[x][y]!='#')
+				{
+					if(a[x][y]=='G')
+						sum++;
+					y++;
+				}
+				//更新map值 
+				if(sum>map)
+				{
+					map=sum;
+					p=i;q=j;
+				 } 
+			}
+		}
+	}
+	printf("炸弹放在(%d,%d),可以消灭%d个敌人。\n",p,q,map);
+	system("pause");
+	return 0;
+}
